@@ -18,10 +18,4 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-
-  spec.add_development_dependency 'bundler', '~> 1.14'
-  spec.add_development_dependency 'rubocop', '~> 0.48'
-  spec.add_development_dependency 'rspec', '~> 3.6'
-  spec.add_development_dependency 'factory_girl', '~> 4.8'
-  spec.add_development_dependency 'faker', '~> 1.7'
 end
