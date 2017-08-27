@@ -18,6 +18,7 @@ module ModelFive
         request['User-Agent'] = 'Model Five (https://github.com/OpenWebslides/model-five)'
 
         response = http.request request
+        response.body.force_encoding 'UTF-8'
 
         client.say :text => response.body, :channel => data.channel
       end
