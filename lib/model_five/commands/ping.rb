@@ -2,8 +2,16 @@
 
 module ModelFive
   module Commands
-    class Ping < SlackRubyBot::Commands::Base
-      command 'ping' do |client, data, _|
+    class Ping < Command
+      command 'ping'
+
+      help do
+        title 'ping'
+        desc 'play ping pong'
+        long_desc 'play ping pong'
+      end
+
+      def self.call(client, data, _)
         client.say :text => 'pong', :channel => data.channel
       end
     end

@@ -5,6 +5,6 @@ module ModelFive
     ##
     # Base command class
     #
-    class Command; end
+    class Command < SlackRubyBot::Commands::Base; end
   end
 end
