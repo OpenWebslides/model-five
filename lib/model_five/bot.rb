@@ -18,6 +18,12 @@ module ModelFive
         title 'joke'
         desc 'tell me a joke'
       end
+
+      command 'deploy' do
+        title 'deploy'
+        desc 'deploy the app'
+        long_desc 'command format: deploy [branch] to <dev | prod>'
+      end
     end
   end
 end
