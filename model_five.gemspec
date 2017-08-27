@@ -26,4 +26,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'factory_girl'
   spec.add_development_dependency 'faker'
+  spec.add_development_dependency 'debase', '0.2.1'
+  spec.add_development_dependency 'ruby-debug-ide'
 end
