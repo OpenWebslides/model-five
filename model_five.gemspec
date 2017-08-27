@@ -18,4 +18,12 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_runtime_dependency 'slack-ruby-bot'
+  spec.add_runtime_dependency 'celluloid-io'
+
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'factory_girl'
+  spec.add_development_dependency 'faker'
 end

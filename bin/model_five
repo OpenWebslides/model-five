@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+#
+# model_five - Start bot
+#
+# Florian Dejonckheere <florian@floriandejonckheere.be>
+#
+
+require 'model_five'
+
+ModelFive::Bot.run
