@@ -8,7 +8,6 @@ module ModelFive
       help do
         title 'ping'
         desc 'play ping pong'
-        long_desc 'play ping pong'
       end
 
       def self.call(client, data, _)
