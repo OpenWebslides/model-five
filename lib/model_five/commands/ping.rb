@@ -5,12 +5,7 @@ module ModelFive
     class Ping < Command
       command 'ping'
 
-      help do
-        title 'ping'
-        desc 'play ping pong'
-      end
-
-      def self.call(client, data, _)
+      def self.call(client, data, _match)
         client.say :text => 'pong', :channel => data.channel
       end
     end

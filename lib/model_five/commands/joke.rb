@@ -8,12 +8,7 @@ module ModelFive
     class Joke < Command
       command 'joke'
 
-      help do
-        title 'joke'
-        desc 'tell me a joke'
-      end
-
-      def self.call(client, data, _)
+      def self.call(client, data, _match)
         uri = URI.parse 'https://icanhazdadjoke.com/'
 
         http = Net::HTTP.new uri.host, uri.port
