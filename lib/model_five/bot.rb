@@ -19,6 +19,11 @@ module ModelFive
         desc 'tell me a joke'
       end
 
+      command 'version' do
+        title 'version'
+        desc 'show bot version'
+      end
+
       command 'deploy' do
         title 'deploy'
         desc 'deploy the app'
