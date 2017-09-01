@@ -7,6 +7,10 @@ environments:
     host: dev.myhost.com
     # SSH username
     user: myuser
+    # Absolute path to SSH keyfile
+    key: /path/to/mykey.pem
+    # Path to deployed application
+    path: /opt/myapp
     # Slack user IDs allowed to deploy to this environment
     allowed_users:
       - XXXXXXXXX
@@ -19,6 +23,10 @@ environments:
     host: qas.myhost.com
     # SSH username
     user: myuser
+    # Absolute path to SSH keyfile
+    key: /path/to/mykey.pem
+    # Path to deployed application
+    path: /opt/myapp
     # Slack user IDs allowed to deploy to this environment
     allowed_users:
       - XXXXXXXXX
@@ -31,6 +39,10 @@ environments:
     host: myhost.com
     # SSH username
     user: myuser
+    # Absolute path to SSH keyfile
+    key: /path/to/mykey.pem
+    # Path to deployed application
+    path: /opt/myapp
     # Slack user IDs allowed to deploy to this environment
     allowed_users:
       - XXXXXXXXX

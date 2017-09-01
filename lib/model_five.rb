@@ -13,4 +13,7 @@ require 'model_five/commands/ping'
 require 'model_five/commands/version'
 require 'model_five/commands/deploy'
 
+require 'model_five/server/command'
+require 'model_five/server/deploy'
+
 require 'model_five/bot'

@@ -23,6 +23,8 @@ module ModelFive
 
         client.say :text => "<@#{data.user}>: started deploy *#{branch}* to *#{env}*",
                    :channel => data.channel
+
+        Server::Deploy.new(branch, env).execute
       end
     end
   end
