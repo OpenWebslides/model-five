@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'slack-ruby-bot'
   spec.add_runtime_dependency 'celluloid-io'
+  spec.add_runtime_dependency 'recursive-open-struct'
 
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rspec'

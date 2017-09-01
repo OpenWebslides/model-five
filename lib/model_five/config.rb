@@ -1,16 +1,10 @@
 # frozen_string_literal: true
 
+require 'yaml'
+require 'recursive-open-struct'
+
 module ModelFive
   def self.config
-    @config ||= Config.new
-  end
-
-  class Config
-    attr_accessor :admin_ids, :channel_ids
-
-    def initialize
-      @admin_ids = (ENV['SLACK_ADMIN_IDS'] || '').split ','
-      @channel_ids = (ENV['SLACK_CHANNEL_IDS'] || '').split ','
-    end
+    @config ||= RecursiveOpenStruct.new(YAML.load_file(File.join __dir__, '..', '..', 'config', 'model_five.yml'))
   end
 end

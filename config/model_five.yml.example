@@ -1,0 +1,39 @@
+# Configuration file for Model Five
+
+# Deployment environments
+environments:
+  dev:
+    # SSH hostname
+    host: dev.myhost.com
+    # SSH username
+    user: myuser
+    # Slack user IDs allowed to deploy to this environment
+    allowed_users:
+      - XXXXXXXXX
+    # Slack channel IDs allowed to deploy from
+    allowed_channels:
+      - XXXXXXXXX
+
+  qas:
+    # SSH hostname
+    host: qas.myhost.com
+    # SSH username
+    user: myuser
+    # Slack user IDs allowed to deploy to this environment
+    allowed_users:
+      - XXXXXXXXX
+    # Slack channel IDs allowed to deploy from
+    allowed_channels:
+      - XXXXXXXXX
+
+  prod:
+    # SSH hostname
+    host: myhost.com
+    # SSH username
+    user: myuser
+    # Slack user IDs allowed to deploy to this environment
+    allowed_users:
+      - XXXXXXXXX
+    # Slack channel IDs allowed to deploy from
+    allowed_channels:
+      - XXXXXXXXX
