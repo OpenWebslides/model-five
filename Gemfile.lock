@@ -1,13 +1,3 @@
-PATH
-  remote: .
-  specs:
-    model_five (1.0.0)
-      celluloid-io
-      net-ssh
-      recursive-open-struct
-      redis
-      slack-ruby-bot
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -114,13 +104,17 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  debase (= 0.2.1)
+  celluloid-io
+  debase (~> 0.2.1)
   factory_girl
   faker
-  model_five!
+  net-ssh
+  recursive-open-struct
+  redis
   rspec
   rubocop
   ruby-debug-ide
+  slack-ruby-bot
 
 BUNDLED WITH
    1.15.4
