@@ -10,14 +10,18 @@ Clone the repository, and install all dependencies:
 $ bundle install
 ```
 
+Install and start the Redis daemon.
+
 ## Configuration
 
-Copy the `model_five.env.example` file to `model_five.env` and adjust the variables accordingly.
+Copy the `model_five.env.example` file to `model_five.env` and change the Slack API token.
+Copy the `config/model_five.yml.example` file to `config/model_five.yml` and change the variables accordingly.
 
 ## Usage
 
 ```shell
-$ foreman start
+$ docker build -t openwebslides/model_five:latest .
+$ docker-compose up
 ```
 
 ## Contributing
