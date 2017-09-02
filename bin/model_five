@@ -9,4 +9,6 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'model_five'
 
+SlackRubyBot::Client.logger.level = Logger::WARN if ENV['RUBY_ENV'] == 'production'
+
 ModelFive::Bot.run

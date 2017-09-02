@@ -9,7 +9,7 @@ services:
     env_file:
       - model_five.env
     environment:
-      - RAILS_ENV=production
+      - RUBY_ENV=production
     depends_on:
       - redis
     links:

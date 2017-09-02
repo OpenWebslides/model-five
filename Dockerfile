@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -qq -y --no-install-recommends \
       build-essential
 
 WORKDIR /app/
-ENV RAILS_ENV production
+ENV RUBY_ENV production
 
 ##
 # Install Ruby dependencies
