@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  ##
+  # Application container
+  #
+  app:
+    image: openwebslides/model_five:latest
+    env_file:
+      - model_five.env
+    environment:
+      - RAILS_ENV=production
+    depends_on:
+      - redis
+    links:
+      - redis
+
+  ##
+  # Redis container
+  #
+  redis:
+    image: redis:3.0
+    volumes:
+      - redis:/var/lib/redis/data/
+    restart: always
+
+volumes:
+  # Redis volume
+  redis:
