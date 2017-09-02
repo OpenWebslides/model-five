@@ -2,4 +2,6 @@
 
 module ModelFive
   class Error < StandardError; end
+
+  class CommandError < Error; end
 end
