@@ -6,9 +6,7 @@ module ModelFive
       command 'version'
 
       def self.call(client, data, _match)
-        gemspec = Gem::Specification.find_by_name 'model_five'
-
-        client.say :text => "#{gemspec.summary} #{gemspec.version} reporting for duty",
+        client.say :text => "Open Webslides Unit Model Five #{ModelFive::VERSION} reporting for duty",
                    :channel => data.channel
       end
     end
