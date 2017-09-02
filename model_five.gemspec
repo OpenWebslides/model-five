@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'celluloid-io'
   spec.add_runtime_dependency 'recursive-open-struct'
   spec.add_runtime_dependency 'net-ssh'
+  spec.add_runtime_dependency 'redis'
 
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rspec'
