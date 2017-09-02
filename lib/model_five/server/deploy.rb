@@ -24,6 +24,8 @@ module ModelFive
         log = Tempfile.new
         ModelFive.redis.set "#{id}_log", log.path
 
+        yield "started deploy *#{@branch}* to *#{@environment}*"
+
         Net::SSH.start env.host,
                        env.user,
                        :keys => [env.key] do |session|
@@ -48,12 +50,14 @@ module ModelFive
               channel.on_request 'exit-status' do |ch, data|
                 code = data.read_long
 
-                unless code.zero?
-                  log.close
+                log.close
 
+                if code.zero?
+                  yield "deployment completed succesfully"
+                else
                   yield "command exited with signal *#{code}*"
                   yield "deploy *#{@branch}* to *#{@environment}* failed"
-                  yield 'use the _log_ command to show the execution log'
+                  yield 'use the *log* command to show the execution log'
                 end
               end
             end
