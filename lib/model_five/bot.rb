@@ -29,6 +29,12 @@ module ModelFive
         desc 'deploy the app'
         long_desc 'command format: deploy [branch] to <dev | prod>'
       end
+
+      command 'log' do
+        title 'log'
+        desc 'show deployment log'
+        long_desc 'command format: log <id>'
+      end
     end
   end
 end
