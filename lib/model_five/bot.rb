@@ -27,13 +27,25 @@ module ModelFive
       command 'deploy' do
         title 'deploy'
         desc 'deploy the app'
-        long_desc 'command format: deploy [branch] to <dev | prod>'
+        long_desc 'command format: deploy [branch] to <environment>'
       end
 
       command 'log' do
         title 'log'
         desc 'show deployment log'
         long_desc 'command format: log <id>'
+      end
+
+      command 'lock' do
+        title 'lock'
+        desc 'lock an environment'
+        long_desc 'command format: lock <environment>'
+      end
+
+      command 'unlock' do
+        title 'unlock'
+        desc 'unlock an environment'
+        long_desc 'command format: unlock <environment>'
       end
     end
   end

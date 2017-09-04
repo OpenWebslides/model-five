@@ -12,4 +12,8 @@ module ModelFive
   def self.redis
     @redis ||= Redis.new
   end
+
+  def self.lock_manager
+    @lock_manager ||= ModelFive::LockManager.new
+  end
 end

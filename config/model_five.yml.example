@@ -1,5 +1,8 @@
 # Configuration file for Model Five
 
+# Lock lifetime in seconds
+lock_lifetime: 1800
+
 # Deployment environments
 environments:
   dev:
