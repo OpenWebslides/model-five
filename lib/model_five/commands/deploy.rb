@@ -23,9 +23,12 @@ module ModelFive
 
         deploy = Server::Deploy.new branch, env
 
-        deploy.execute do |msg|
-          client.say :text => "<@#{data.user}>: [##{deploy.id}] #{msg}",
-                     :channel => data.channel
+        # Start async deploy
+        Thread.new do
+          deploy.execute do |msg|
+            client.say :text => "<@#{data.user}>: [##{deploy.id}] #{msg}",
+                       :channel => data.channel
+          end
         end
       end
     end
