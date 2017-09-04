@@ -9,10 +9,10 @@ module ModelFive
         env = match[:env] || 'dev'
 
         begin
-          policy = Policy.new :user => data.user,
-                              :channel => data.channel,
-                              :branch => branch,
-                              :environment => env
+          policy = Policies::Deploy.new :user => data.user,
+                                        :channel => data.channel,
+                                        :branch => branch,
+                                        :environment => env
 
           policy.authorize!
         rescue ModelFive::Error => e
