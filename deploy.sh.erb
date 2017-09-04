@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+#
+# deploy.sh - Deployment procedures
+#
+# Florian Dejonckheere <florian@floriandejonckheere.be>
+#
+
+# Abort on any non-zero exit code
+set -e
+
+cd "<%= env.path %>"
+
+# Get requested source code
+git fetch --all
+git checkout `git rev-parse "<%= @branch %>"`
+
+# Build Docker image
+docker build -t openwebslides/openwebslides:latest .
+
+# Restart containers
+docker-compose down
+docker-compose up -d

@@ -2,6 +2,7 @@
 
 require 'net/ssh'
 require 'tempfile'
+require 'erb'
 
 module ModelFive
   module Server
@@ -18,8 +19,7 @@ module ModelFive
         raise 'No block given' unless block_given?
 
         env = ModelFive.config.environments[@environment]
-
-        command = "[[ -d #{env.path} ]] && cd #{env.path} && git fetch --all && git checkout `git rev-parse #{@branch}` && docker build -t openwebslides/openwebslides:latest . && docker-compose down; docker-compose up -d"
+        command = ERB.new(File.read File.join ModelFive.root, 'deploy.sh.erb').result binding
 
         log = Tempfile.new
         ModelFive.redis.set "#{id}_log", log.path
@@ -43,19 +43,19 @@ module ModelFive
                 log.write data
               end
 
-              channel.on_request 'exit-signal' do |ch, data|
+              channel.on_request 'exit-signal' do |_ch, data|
                 yield "command received signal *#{data.read_string}*"
               end
 
-              channel.on_request 'exit-status' do |ch, data|
+              channel.on_request 'exit-status' do |_ch, data|
                 code = data.read_long
 
                 log.close
 
                 if code.zero?
-                  yield "deployment completed succesfully"
+                  yield 'deployment completed succesfully'
                 else
-                  yield "command exited with signal *#{code}*"
+                  yield "command exited with exit status *#{code}*"
                   yield "deploy *#{@branch}* to *#{@environment}* failed"
                   yield 'use the *log* command to show the execution log'
                 end

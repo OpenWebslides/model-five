@@ -18,3 +18,9 @@ require 'model_five/server/command'
 require 'model_five/server/deploy'
 
 require 'model_five/bot'
+
+module ModelFive
+  def self.root
+    File.expand_path '../..', __FILE__
+  end
+end
