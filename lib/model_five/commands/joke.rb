@@ -6,7 +6,7 @@ require 'uri'
 module ModelFive
   module Commands
     class Joke < Command
-      command 'joke' do |client, data, _match|
+      def self.execute(client, data, _match)
         uri = URI.parse 'https://icanhazdadjoke.com/'
 
         http = Net::HTTP.new uri.host, uri.port

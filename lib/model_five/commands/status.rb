@@ -6,7 +6,7 @@ require 'uri'
 module ModelFive
   module Commands
     class Status < Command
-      command 'status' do |client, data, _match|
+      def self.execute(client, data, _match)
         text = []
 
         ModelFive.config.environments.marshal_dump.keys.each do |env|

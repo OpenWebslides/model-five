@@ -6,25 +6,19 @@ module ModelFive
     # Lock an environment
     #
     class Lock < Command
-      command 'lock' do |client, data, match|
-        begin
-          raise ModelFive::Error, 'No environment specified' unless match[:expression]
+      def self.execute(client, data, match)
+        raise ModelFive::Error, 'No environment specified' unless match[:expression]
 
-          env, *message = match[:expression].split(' ')
-          reason = message.join ' '
+        env, *message = match[:expression].split(' ')
+        reason = message.join ' '
 
-          raise ModelFive::Error, "Environment *#{env}* not found" unless ModelFive.config.environments[env]
-          raise ModelFive::Error, 'No reason specified' if message.empty?
+        raise ModelFive::Error, "Environment *#{env}* not found" unless ModelFive.config.environments[env]
+        raise ModelFive::Error, 'No reason specified' if message.empty?
 
-          policy = Policies::Lock.new :user => data.user,
-                                      :environment => env
+        policy = Policies::Lock.new :user => data.user,
+                                    :environment => env
 
-          policy.authorize!
-        rescue ModelFive::Error => e
-          client.say :text => e,
-                     :channel => data.channel
-          next
-        end
+        policy.authorize!
 
         locked, owner, reason_locked = ModelFive.lock_manager.locked? env
 
