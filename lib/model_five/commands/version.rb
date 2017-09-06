@@ -3,9 +3,7 @@
 module ModelFive
   module Commands
     class Version < Command
-      command 'version'
-
-      def self.call(client, data, _match)
+      command 'version' do |client, data, _match|
         client.say :text => "Open Webslides Unit Model Five #{ModelFive::VERSION} reporting for duty",
                    :channel => data.channel
       end

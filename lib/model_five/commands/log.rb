@@ -3,20 +3,24 @@
 module ModelFive
   module Commands
     class Log < Command
-      match(/log (?<id>[0-9]*)$/) do |client, data, match|
-        path = ModelFive.redis.get "#{match[:id]}_log"
+      command 'log' do |client, data, match|
+        begin
+          raise ModelFive::Error, 'No environment specified' unless match[:expression]
 
-        unless path
-          client.say :text => 'No such deployment',
+          id = match[:expression].split(' ').first
+          path = ModelFive.redis.get "#{id}_log"
+
+          raise ModelFive::Error, "Deployment *#{id}* not found" unless path
+
+          unless File.exist? path
+            client.say :text => 'Log file not found',
+                       :channel => data.channel
+
+            next
+          end
+        rescue ModelFive::Error => e
+          client.say :text => e,
                      :channel => data.channel
-
-          next
-        end
-
-        unless File.exist? path
-          client.say :text => 'Log file not found',
-                     :channel => data.channel
-
           next
         end
 

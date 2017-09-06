@@ -3,10 +3,9 @@
 module ModelFive
   module Commands
     class Ping < Command
-      command 'ping'
-
-      def self.call(client, data, _match)
-        client.say :text => 'pong', :channel => data.channel
+      command 'ping' do |client, data, _match|
+        client.say :text => 'pong',
+                   :channel => data.channel
       end
     end
   end

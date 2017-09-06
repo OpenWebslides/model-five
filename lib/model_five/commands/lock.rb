@@ -14,7 +14,7 @@ module ModelFive
           reason = message.join ' '
 
           raise ModelFive::Error, "Environment *#{env}* not found" unless ModelFive.config.environments[env]
-          raise ModelFive::Error, 'No reason specified' unless message.empty?
+          raise ModelFive::Error, 'No reason specified' if message.empty?
 
           policy = Policies::Lock.new :user => data.user,
                                       :environment => env
