@@ -22,7 +22,7 @@ module ModelFive
             client.say :text => "Environment *#{env}* is now unlocked",
                        :channel => data.channel
           else
-            client.say :text => "Environment *#{env}* is locked by <@#{owner}> because: *#{reason_locked}*",
+            client.say :text => "Environment *#{env}* is locked by <@#{owner}>: *#{reason_locked}*",
                        :channel => data.channel
           end
         else

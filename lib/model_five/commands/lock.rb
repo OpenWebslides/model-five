@@ -23,11 +23,11 @@ module ModelFive
         locked, owner, reason_locked = ModelFive.lock_manager.locked? env
 
         if locked
-          client.say :text => "Environment *#{env}* is already locked by <@#{owner}> because: *#{reason_locked}*",
+          client.say :text => "Environment *#{env}* is already locked by <@#{owner}>: *#{reason_locked}*",
                      :channel => data.channel
         else
           ModelFive.lock_manager.lock env, data.user, reason
-          client.say :text => "Environment *#{env}* is now locked for *#{ModelFive.config.lock_lifetime} seconds* because: *#{reason}*",
+          client.say :text => "Environment *#{env}* is now locked for *#{ModelFive.config.lock_lifetime} seconds* by <@#{owner}>: *#{reason}*",
                      :channel => data.channel
         end
       end
