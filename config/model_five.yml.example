@@ -17,9 +17,6 @@ environments:
     # Slack user IDs allowed to deploy to this environment
     allowed_users:
       - XXXXXXXXX
-    # Slack channel IDs allowed to deploy from
-    allowed_channels:
-      - XXXXXXXXX
 
   qas:
     # SSH hostname
@@ -33,9 +30,6 @@ environments:
     # Slack user IDs allowed to deploy to this environment
     allowed_users:
       - XXXXXXXXX
-    # Slack channel IDs allowed to deploy from
-    allowed_channels:
-      - XXXXXXXXX
 
   prod:
     # SSH hostname
@@ -48,7 +42,4 @@ environments:
     path: /opt/myapp
     # Slack user IDs allowed to deploy to this environment
     allowed_users:
-      - XXXXXXXXX
-    # Slack channel IDs allowed to deploy from
-    allowed_channels:
       - XXXXXXXXX

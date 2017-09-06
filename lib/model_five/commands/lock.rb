@@ -6,7 +6,6 @@ module ModelFive
       match(/lock (?<env>\w+)$/) do |client, data, match|
         begin
           policy = Policies::Lock.new :user => data.user,
-                                      :channel => data.channel,
                                       :environment => match[:env]
 
           policy.authorize!

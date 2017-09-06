@@ -10,7 +10,6 @@ module ModelFive
 
         begin
           policy = Policies::Deploy.new :user => data.user,
-                                        :channel => data.channel,
                                         :branch => branch,
                                         :environment => env
 
