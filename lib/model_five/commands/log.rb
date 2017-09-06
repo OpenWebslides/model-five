@@ -24,11 +24,18 @@ module ModelFive
           next
         end
 
+        if File.empty? path
+          client.say :text => 'Log file is empty',
+                     :channel => data.channel
+
+          next
+        end
+
         client.web_client.files_upload :channels => data.channel,
                                        :as_user => true,
                                        :file => Faraday::UploadIO.new(path, 'text/plain'),
                                        :title => "Deployment log ##{id}",
-                                       :filename => "deployment_#{id}.log"
+                                       :filename => "deployment_#{id}.txt"
       end
     end
   end
