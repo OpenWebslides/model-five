@@ -4,19 +4,13 @@ module ModelFive
   module Commands
     class Unlock < Command
       command 'unlock' do |client, data, match|
-        unless match[:expression]
-          client.say :text => 'No environment specified',
-                     :channel => data.channel
-        end
-
-        env = match[:expression].split(' ').first
-
-        unless ModelFive.config.environments[env]
-          client.say :text => "Environment *#{env}* not found",
-                     :channel => data.channel
-        end
-
         begin
+          raise ModelFive::Error, 'No environment specified' unless match[:expression]
+
+          env = match[:expression].split(' ').first
+
+          raise ModelFive::Error, "Environment *#{env}* not found" unless ModelFive.config.environments[env]
+
           policy = Policies::Lock.new :user => data.user,
                                       :environment => env
 
@@ -27,14 +21,14 @@ module ModelFive
           next
         end
 
-        locked, owner = ModelFive.lock_manager.locked? env
+        locked, owner, reason_locked = ModelFive.lock_manager.locked? env
 
         if locked && owner == data.user
           if ModelFive.lock_manager.unlock env, data.user
             client.say :text => "Environment *#{env}* is now unlocked",
                        :channel => data.channel
           else
-            client.say :text => "Environment *#{env}* is locked by <@#{owner}>",
+            client.say :text => "Environment *#{env}* is locked by <@#{owner}> because: *#{reason_locked}*",
                        :channel => data.channel
           end
         else

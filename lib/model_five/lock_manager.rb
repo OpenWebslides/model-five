@@ -22,16 +22,17 @@ module ModelFive
         return false
       end
 
-      return true, locks[key][:owner]
+      return true, locks[key][:owner], locks[key][:reason]
     end
 
-    def lock(key, owner)
+    def lock(key, owner, reason)
       @mutex.synchronize do
         return false if locked? key
 
         locks[key] = {
           :owner => owner,
-          :timestamp => Time.now.to_i
+          :timestamp => Time.now.to_i,
+          :reason => reason
         }
 
         true

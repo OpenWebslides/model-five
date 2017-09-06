@@ -39,7 +39,7 @@ module ModelFive
       command 'lock' do
         title 'lock'
         desc 'lock an environment'
-        long_desc 'command format: lock <environment>'
+        long_desc 'command format: lock <environment> <reason>'
       end
 
       command 'unlock' do

@@ -7,19 +7,15 @@ module ModelFive
     #
     class Lock < Command
       command 'lock' do |client, data, match|
-        unless match[:expression]
-          client.say :text => 'No environment specified',
-                     :channel => data.channel
-        end
-
-        env = match[:expression].split(' ').first
-
-        unless ModelFive.config.environments[env]
-          client.say :text => "Environment *#{env}* not found",
-                     :channel => data.channel
-        end
-
         begin
+          raise ModelFive::Error, 'No environment specified' unless match[:expression]
+
+          env, *message = match[:expression].split(' ')
+          reason = message.join ' '
+
+          raise ModelFive::Error, "Environment *#{env}* not found" unless ModelFive.config.environments[env]
+          raise ModelFive::Error, 'No reason specified' unless message.empty?
+
           policy = Policies::Lock.new :user => data.user,
                                       :environment => env
 
@@ -30,14 +26,14 @@ module ModelFive
           next
         end
 
-        locked, owner = ModelFive.lock_manager.locked? env
+        locked, owner, reason_locked = ModelFive.lock_manager.locked? env
 
         if locked
-          client.say :text => "Environment *#{env}* is already locked by <@#{owner}>",
+          client.say :text => "Environment *#{env}* is already locked by <@#{owner}> because: *#{reason_locked}*",
                      :channel => data.channel
         else
-          ModelFive.lock_manager.lock env, data.user
-          client.say :text => "Environment *#{env}* is now locked for *#{ModelFive.config.lock_lifetime} seconds*",
+          ModelFive.lock_manager.lock env, data.user, reason
+          client.say :text => "Environment *#{env}* is now locked for *#{ModelFive.config.lock_lifetime} seconds* because: *#{reason}*",
                      :channel => data.channel
         end
       end
