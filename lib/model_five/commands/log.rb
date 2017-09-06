@@ -27,8 +27,8 @@ module ModelFive
         client.web_client.files_upload :channels => data.channel,
                                        :as_user => true,
                                        :file => Faraday::UploadIO.new(path, 'text/plain'),
-                                       :title => "Deployment log ##{match[:id]}",
-                                       :filename => "deployment_#{match[:id]}.log"
+                                       :title => "Deployment log ##{id}",
+                                       :filename => "deployment_#{id}.log"
       end
     end
   end
