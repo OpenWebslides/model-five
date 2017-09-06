@@ -12,7 +12,7 @@ cd "<%= env.path %>"
 
 # Get requested source code
 git fetch --all
-git checkout `git rev-parse "<%= @branch %>"`
+git checkout `git rev-parse origin/"<%= @branch %>"`
 
 # Build Docker image
 docker build -t openwebslides/openwebslides:latest .
