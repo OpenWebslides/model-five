@@ -2,11 +2,26 @@
 
 module ModelFive
   module Commands
+    ##
+    # Lock an environment
+    #
     class Lock < Command
-      match(/lock (?<env>\w+)$/) do |client, data, match|
+      command 'lock' do |client, data, match|
+        unless match[:expression]
+          client.say :text => 'No environment specified',
+                     :channel => data.channel
+        end
+
+        env = match[:expression].split(' ').first
+
+        unless ModelFive.config.environments[env]
+          client.say :text => "Environment *#{env}* not found",
+                     :channel => data.channel
+        end
+
         begin
           policy = Policies::Lock.new :user => data.user,
-                                      :environment => match[:env]
+                                      :environment => env
 
           policy.authorize!
         rescue ModelFive::Error => e
@@ -15,14 +30,14 @@ module ModelFive
           next
         end
 
-        locked, owner = ModelFive.lock_manager.locked? match[:env]
+        locked, owner = ModelFive.lock_manager.locked? env
 
         if locked
-          client.say :text => "*#{match[:env]}* is already locked by <@#{owner}>",
+          client.say :text => "Environment *#{env}* is already locked by <@#{owner}>",
                      :channel => data.channel
         else
-          ModelFive.lock_manager.lock match[:env], data.user
-          client.say :text => "*#{match[:env]}* is now locked for *#{ModelFive.config.lock_lifetime} seconds*",
+          ModelFive.lock_manager.lock env, data.user
+          client.say :text => "Environment *#{env}* is now locked for *#{ModelFive.config.lock_lifetime} seconds*",
                      :channel => data.channel
         end
       end
