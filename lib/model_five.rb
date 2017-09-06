@@ -18,6 +18,7 @@ require 'model_five/commands/deploy'
 require 'model_five/commands/log'
 require 'model_five/commands/lock'
 require 'model_five/commands/unlock'
+require 'model_five/commands/status'
 
 require 'model_five/server/command'
 require 'model_five/server/deploy'

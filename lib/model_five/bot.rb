@@ -47,6 +47,11 @@ module ModelFive
         desc 'unlock an environment'
         long_desc 'command format: unlock <environment>'
       end
+
+      command 'status' do
+        title 'status'
+        desc 'show status of all environments'
+      end
     end
   end
 end
