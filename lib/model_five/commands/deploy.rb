@@ -25,16 +25,12 @@ module ModelFive
           client.say :text => "Environment *#{env}* is already locked by <@#{owner}>: *#{reason_locked}*",
                      :channel => data.channel
         else
-          ModelFive.lock_manager.lock env, data.user, "deploying #{branch}"
-
-          deploy = Server::Deploy.new branch, env
+          deploy = Server::Deploy.new branch, env, data.user
 
           deploy.execute do |msg|
             client.say :text => "<@#{data.user}>: [##{deploy.id}] #{msg}",
                        :channel => data.channel
           end
-
-          ModelFive.lock_manager.unlock env, data.user
         end
       end
     end

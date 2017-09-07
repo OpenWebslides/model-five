@@ -4,11 +4,13 @@ module ModelFive
   module Server
     class Command
       attr_accessor :branch,
-                    :environment
+                    :environment,
+                    :user
 
-      def initialize(branch, environment)
+      def initialize(branch, environment, user)
         @branch = branch
         @environment = environment
+        @user = user
       end
 
       def execute
