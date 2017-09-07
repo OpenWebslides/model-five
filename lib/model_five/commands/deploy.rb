@@ -19,24 +19,22 @@ module ModelFive
         policy.authorize!
 
         # Start async deploy
-        Thread.new do
-          locked, owner, reason_locked = ModelFive.lock_manager.locked? env
+        locked, owner, reason_locked = ModelFive.lock_manager.locked? env
 
-          if locked
-            client.say :text => "Environment *#{env}* is already locked by <@#{owner}>: *#{reason_locked}*",
+        if locked
+          client.say :text => "Environment *#{env}* is already locked by <@#{owner}>: *#{reason_locked}*",
+                     :channel => data.channel
+        else
+          ModelFive.lock_manager.lock env, data.user, "deploying #{branch}"
+
+          deploy = Server::Deploy.new branch, env
+
+          deploy.execute do |msg|
+            client.say :text => "<@#{data.user}>: [##{deploy.id}] #{msg}",
                        :channel => data.channel
-          else
-            ModelFive.lock_manager.lock env, data.user, "deploying #{branch}"
-
-            deploy = Server::Deploy.new branch, env
-
-            deploy.execute do |msg|
-              client.say :text => "<@#{data.user}>: [##{deploy.id}] #{msg}",
-                         :channel => data.channel
-            end
-
-            ModelFive.lock_manager.unlock env, data.user
           end
+
+          ModelFive.lock_manager.unlock env, data.user
         end
       end
     end
