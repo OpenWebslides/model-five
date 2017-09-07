@@ -21,6 +21,8 @@ module ModelFive
         env = ModelFive.config.environments[@environment]
         command = ERB.new(File.read File.join ModelFive.root, 'deploy.sh.erb').result binding
 
+        raise "No such private key: #{env.key}" unless File.exist? env.key
+
         log = Tempfile.new
         ModelFive.redis.set "#{id}_log", log.path
 
